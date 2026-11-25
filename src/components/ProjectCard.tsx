@@ -2,15 +2,16 @@ import { motion } from 'framer-motion';
 import type { Project } from '../data/portfolio';
 import { EASE, Tilt } from './fx';
 import { ProjectArt } from './Poster';
+import YPLogo from './YPLogo';
 
 export default function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   return (
     <motion.article
       className="w-[84vw] shrink-0 snap-start sm:w-[62vw] lg:w-[46vw] xl:w-[42vw]"
-      initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px -10% 0px 0px' }}
-      transition={{ duration: 0.9, delay: index * 0.08, ease: EASE }}
+      transition={{ duration: 0.7, delay: Math.min(index, 3) * 0.06, ease: EASE }}
     >
       <Tilt max={5} className="group rounded-2xl">
         <div
@@ -34,7 +35,7 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
           </motion.div>
 
           <div className="absolute left-5 top-5 flex items-center gap-2 sm:left-7 sm:top-7">
-            <span className="font-display text-xl leading-none text-crimson-2">Y</span>
+            <YPLogo animate={false} className="h-4 w-auto" />
             <span className="text-[10px] font-bold tracking-[0.34em] text-bone/80">ORIGINAL</span>
           </div>
           <span className="absolute right-5 top-5 rounded border border-white/30 px-1.5 py-px text-[10px] font-bold text-bone sm:right-7 sm:top-7">{project.year}</span>

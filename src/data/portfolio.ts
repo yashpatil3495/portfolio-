@@ -16,7 +16,7 @@ export const profile = {
   role: 'Full-Stack & AI Developer',
   tagline: ['Full-Stack Developer', 'AI / LLMs', 'Hackathon Builder'],
   intro:
-    'A Computer Engineering student at JSPM RSCOE and a Data Science and Management student at IIT Madras, building AI-powered products with React, Next.js, Node.js and Claude AI — and shipping prototypes in 24-hour hackathons.',
+    'I study Computer Engineering at JSPM RSCOE alongside a BS in Data Science and Management at IIT Madras. I build web products with React, Next.js, Node.js, and LLMs, mostly tested under 24-hour hackathon deadlines.',
   location: 'Pune, Maharashtra',
   email: 'yashpatil3495@gmail.com',
   links: {
@@ -117,11 +117,11 @@ export const projects: Project[] = [
     title: 'ScholarHub',
     year: '2026',
     genre: 'AI • EdTech • Multilingual',
-    logline: 'An AI-powered scholarship discovery platform that matches students to scholarships.',
+    logline: 'An AI scholarship discovery platform that matches students with relevant opportunities and tracks their applications.',
     stack: ['AI Assistant', 'Multilingual (EN/HI/MR)', 'Node.js', 'Dashboard'],
     build: [
-      'Built an AI-powered scholarship discovery platform with a recommendation engine that matches students to scholarships.',
-      'Developed an application-tracking dashboard with a document template system and multilingual support.',
+      'Built the recommendation workflow that matches student profiles to eligible scholarships.',
+      'Created an application-tracking dashboard with reusable document templates and support for English, Hindi, and Marathi.',
     ],
     features: [
       'Recommendation engine for scholarship matching',
@@ -131,9 +131,9 @@ export const projects: Project[] = [
       'Multilingual support (English, Hindi, Marathi)',
     ],
     metrics: [
-      { value: '3', label: 'languages — English, Hindi, Marathi' },
-      { value: 'AI', label: 'scholarship recommendation engine' },
-      { value: '1', label: 'application-tracking dashboard' },
+      { value: '3', label: 'English, Hindi, and Marathi' },
+      { value: 'AI', label: 'Scholarship matching engine' },
+      { value: '1', label: 'Application-tracking dashboard' },
     ],
     palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
     motif: 'scholar',
@@ -143,12 +143,12 @@ export const projects: Project[] = [
     title: 'EmoLearn',
     year: '2026',
     genre: 'AI • EdTech • Emotion AI',
-    logline: 'An emotion-adaptive EdTech platform that tunes its AI tutoring style to how the learner feels.',
+    logline: "An adaptive tutoring platform that adjusts how AI explains concepts based on the learner's detected facial emotion.",
     stack: ['Claude AI', 'Node.js', 'Supabase', 'Emotion AI', 'SSE'],
     build: [
-      'Created an emotion-adaptive EdTech platform that uses facial emotion detection to dynamically adjust AI tutoring style.',
-      'Implemented real-time Claude AI streaming via Server-Sent Events (SSE) with Supabase-backed session management.',
-      'Added a gamification system with daily challenges, XP tracking, and personalized learning paths.',
+      'Connected facial emotion detection to the tutoring prompt so explanations adapt to student confusion or engagement.',
+      'Implemented real-time Claude AI response streaming over Server-Sent Events (SSE) with session persistence in Supabase.',
+      'Added daily challenges, XP tracking, and structured learning paths.',
     ],
     features: [
       'Facial emotion detection',
@@ -158,9 +158,9 @@ export const projects: Project[] = [
       'Daily challenges, XP tracking, personalized learning paths',
     ],
     metrics: [
-      { value: 'SSE', label: 'real-time Claude AI streaming' },
-      { value: 'Emotion', label: 'facial detection drives tutoring style' },
-      { value: 'XP', label: 'daily challenges and gamification' },
+      { value: 'SSE', label: 'Real-time Claude AI streaming' },
+      { value: 'Emotion', label: 'Adaptive tutoring style' },
+      { value: 'XP', label: 'Daily challenges and tracking' },
     ],
     palette: { from: '#2a0610', via: '#7a0f24', to: '#0b0710', accent: '#ff3d5a' },
     motif: 'emotion',
@@ -170,12 +170,12 @@ export const projects: Project[] = [
     title: 'CipherPixel',
     year: '2025',
     genre: 'Security • Cryptography • Frontend',
-    logline: 'A steganography engine that hides encrypted files inside images.',
+    logline: 'An image steganography tool that encrypts files and hides them inside image pixels using bitwise LSB manipulation.',
     stack: ['Bitwise Algorithms', 'Cryptography', 'Binary Protocol', 'CSS3'],
     build: [
-      'Developed a steganography engine that hides encrypted files inside images using bitwise LSB manipulation.',
-      'Engineered custom binary protocols for secure data embedding, with a complete end-to-end encryption workflow.',
-      'Designed a modern, responsive UI for seamless encryption and decryption across devices.',
+      'Implemented bitwise least-significant-bit (LSB) encoding and decoding to embed encrypted payloads inside standard images.',
+      'Defined a custom binary framing protocol so embedded files can be extracted reliably after encryption.',
+      'Designed a clean interface for both encrypting and decrypting files across screen sizes.',
     ],
     features: [
       'Encrypted files hidden inside images',
@@ -185,9 +185,9 @@ export const projects: Project[] = [
       'Responsive encrypt / decrypt UI',
     ],
     metrics: [
-      { value: 'LSB', label: 'bitwise image steganography' },
-      { value: 'E2E', label: 'complete encryption workflow' },
-      { value: 'Custom', label: 'binary protocol for embedding' },
+      { value: 'LSB', label: 'Bitwise image steganography' },
+      { value: 'E2E', label: 'Encrypt and decrypt workflow' },
+      { value: 'Binary', label: 'Custom embedding protocol' },
     ],
     palette: { from: '#03150f', via: '#0d5a40', to: '#050a08', accent: '#46e3a8' },
     motif: 'cipher',
@@ -197,11 +197,11 @@ export const projects: Project[] = [
     title: 'Focus Flow',
     year: '2025',
     genre: 'Productivity • Gamified • Data Viz',
-    logline: 'A gamified productivity dashboard that combines a Pomodoro timer with drag-and-drop tasks.',
+    logline: 'A productivity dashboard combining a Pomodoro timer, drag-and-drop task board, Spotify focus sessions, and local analytics.',
     stack: ['Spotify API', 'Task Management', 'Data Visualization'],
     build: [
-      'Built a gamified productivity dashboard that combines a Pomodoro timer with drag-and-drop task management.',
-      'Integrated the Spotify API for focus music sessions, with real-time analytics and local-storage persistence.',
+      'Built a Pomodoro timer paired with a drag-and-drop task workflow.',
+      'Integrated the Spotify API for focus playlists alongside session analytics stored in local storage.',
     ],
     features: [
       'Pomodoro timer',
@@ -211,9 +211,9 @@ export const projects: Project[] = [
       'Local-storage persistence',
     ],
     metrics: [
-      { value: 'Pomodoro', label: 'timer built in' },
-      { value: 'Spotify', label: 'API for focus music' },
-      { value: 'Live', label: 'real-time analytics' },
+      { value: 'Pomodoro', label: 'Built-in focus timer' },
+      { value: 'Spotify', label: 'Focus playlist integration' },
+      { value: 'Local', label: 'Real-time session analytics' },
     ],
     palette: { from: '#1a0d02', via: '#8a4a07', to: '#0a0806', accent: '#ffb547' },
     motif: 'focus',
@@ -264,7 +264,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'languages',
     title: 'Languages',
-    subtitle: 'Where the code starts',
+    subtitle: 'Core programming & markup',
     skills: [
       { name: 'JavaScript', mono: 'Js' },
       { name: 'Python', mono: 'Py' },
@@ -277,7 +277,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'frameworks',
     title: 'Frameworks',
-    subtitle: 'Interfaces & servers',
+    subtitle: 'Frontend & backend',
     skills: [
       { name: 'React', mono: 'Re' },
       { name: 'Next.js 15', mono: 'Nx' },
@@ -289,7 +289,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'tools',
     title: 'Developer Tools',
-    subtitle: 'Shipping & backends',
+    subtitle: 'Version control, databases & tooling',
     skills: [
       { name: 'Git', mono: 'Gt' },
       { name: 'GitHub', mono: 'Gh' },
@@ -302,7 +302,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'ai',
     title: 'AI / ML',
-    subtitle: 'LLM-powered products',
+    subtitle: 'LLM integration & streaming',
     skills: [
       { name: 'Claude AI', mono: 'Cl' },
       { name: 'GPT APIs', mono: 'Gp' },
@@ -314,7 +314,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'design',
     title: 'Design',
-    subtitle: 'Craft & motion',
+    subtitle: 'Interfaces, motion & canvas',
     skills: [
       { name: 'UI/UX', mono: 'Ux' },
       { name: 'Figma', mono: 'Fg' },
@@ -389,12 +389,12 @@ export const seasons: Season[] = [
     number: 1,
     title: 'The Foundation',
     period: '2023 – 2025',
-    synopsis: 'Higher Secondary (12th Grade) in Science — Physics, Chemistry and Mathematics — under the Maharashtra State Board.',
+    synopsis: 'Completed 12th Grade in Science (PCM) under the Maharashtra State Board.',
     episodes: [
       {
         code: 'S01 E01',
-        title: 'The Foundation',
-        description: 'Higher Secondary (12th Grade), Science (PCM), Maharashtra State Board.',
+        title: 'Higher Secondary',
+        description: 'Physics, Chemistry, and Mathematics under the Maharashtra State Board.',
         tags: ['PCM', 'Maharashtra State Board'],
         runtime: '2023 – 2025',
         palette: amber,
@@ -405,12 +405,12 @@ export const seasons: Season[] = [
     number: 2,
     title: 'Enter: Engineering',
     period: '2025',
-    synopsis: 'Computer Engineering at JSPM Rajarshi Shahu College of Engineering, Pune — and the first hackathons.',
+    synopsis: 'Started Computer Engineering at JSPM RSCOE in Pune and entered my first 24-hour hackathons.',
     episodes: [
       {
         code: 'S02 E01',
         title: 'The Engineer',
-        description: 'Bachelor of Technology in Computer Engineering at JSPM RSCOE, Pune.',
+        description: 'Started B.Tech in Computer Engineering at JSPM RSCOE, Pune.',
         tags: ['B.Tech', 'Computer Engineering'],
         runtime: 'Aug 2025 – May 2029',
         palette: violet,
@@ -418,15 +418,15 @@ export const seasons: Season[] = [
       {
         code: 'S02 E02',
         title: 'The 24-Hour Builder',
-        description: 'Built working projects in 24-hour college-level coding competitions under tight deadlines.',
+        description: 'Built and deployed working prototypes from scratch with teammates in 24-hour college hackathons.',
         tags: ['Hackathons', 'Prototyping'],
         runtime: '2025 – 2026',
         palette: crimson,
       },
       {
         code: 'S02 E03',
-        title: 'The Runner-Up',
-        description: '2nd Place at the Recursion Hackathon, JSPM RSCOE — and 4th Rank at Aayam, NIT Agartala.',
+        title: 'First Podiums',
+        description: 'Placed 2nd at Recursion Hackathon (JSPM RSCOE) and 4th at Aayam (NIT Agartala).',
         tags: ['Recursion Hackathon', 'Aayam', 'NIT Agartala'],
         runtime: 'Competitions',
         palette: jade,
@@ -438,12 +438,12 @@ export const seasons: Season[] = [
     number: 3,
     title: 'First Originals',
     period: '2025',
-    synopsis: 'Two self-driven builds: a steganography engine and a gamified focus dashboard.',
+    synopsis: 'Two independent builds: an image steganography tool and a focus dashboard.',
     episodes: [
       {
         code: 'S03 E01',
-        title: 'The Cipher',
-        description: 'CipherPixel — a steganography engine that hides encrypted files in images using bitwise LSB manipulation.',
+        title: 'CipherPixel',
+        description: 'Built a browser-based steganography tool that hides encrypted files inside images using bitwise LSB encoding.',
         tags: ['Cryptography', 'Bitwise', 'CSS3'],
         runtime: '2025',
         palette: jade,
@@ -451,8 +451,8 @@ export const seasons: Season[] = [
       },
       {
         code: 'S03 E02',
-        title: 'The Focus',
-        description: 'Focus Flow — a Pomodoro timer with drag-and-drop tasks, Spotify focus music and real-time analytics.',
+        title: 'Focus Flow',
+        description: 'Built a Pomodoro and task dashboard with Spotify playback and session analytics.',
         tags: ['Spotify API', 'Data Visualization'],
         runtime: '2025',
         palette: amber,
@@ -464,12 +464,12 @@ export const seasons: Season[] = [
     number: 4,
     title: 'Going Bigger',
     period: '2026',
-    synopsis: 'AI-powered products, a state-level podium, a second degree and a Tech Lead role.',
+    synopsis: 'Moved into AI products, won a state-level podium, started a second degree at IIT Madras, and took on a club leadership role.',
     episodes: [
       {
         code: 'S04 E01',
-        title: 'The Scholar',
-        description: 'ScholarHub — AI scholarship discovery with a recommendation engine, tracking dashboard and EN / HI / MR support.',
+        title: 'ScholarHub',
+        description: 'Built an AI scholarship matching platform with application tracking and English, Hindi, and Marathi support.',
         tags: ['AI Assistant', 'Node.js', 'Multilingual'],
         runtime: '2026',
         palette: ocean,
@@ -477,8 +477,8 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E02',
-        title: 'The Empath',
-        description: 'EmoLearn — facial emotion detection adjusts the AI tutoring style, streamed live from Claude over SSE.',
+        title: 'EmoLearn',
+        description: 'Built an AI tutor that reads facial expressions and streams adaptive explanations from Claude AI over SSE.',
         tags: ['Claude AI', 'Supabase', 'SSE'],
         runtime: '2026',
         palette: crimson,
@@ -486,8 +486,8 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E03',
-        title: 'The Podium',
-        description: '2nd Place at the state-level Genesis Hackathon of Impact, JSPM RSCOE.',
+        title: 'State-Level Podium',
+        description: 'Placed 2nd at the Genesis Hackathon of Impact at JSPM RSCOE.',
         tags: ['Genesis Hackathon of Impact', 'State-Level'],
         runtime: '2026',
         palette: amber,
@@ -495,8 +495,8 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E04',
-        title: 'The Double Degree',
-        description: 'Joined the online BS in Data Science and Management at IIT Madras, alongside the B.Tech.',
+        title: 'IIT Madras',
+        description: 'Started the online BS in Data Science and Management alongside my B.Tech.',
         tags: ['IIT Madras', 'Data Science'],
         runtime: 'May 2026 – Present',
         palette: violet,
@@ -504,8 +504,8 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E05',
-        title: 'The Lead',
-        description: 'Tech Lead of the Mathematics Club at JSPM RSCOE, leading the club’s technical initiatives.',
+        title: 'Tech Lead',
+        description: 'Leading technical initiatives for the Mathematics Club at JSPM RSCOE.',
         tags: ['Tech Lead', 'Mathematics Club'],
         runtime: 'Aug 2026 – Present',
         palette: ocean,
@@ -518,16 +518,16 @@ export const seasons: Season[] = [
 export type TopPick = { label: string; title: string; detail: string; palette: Palette; projectId?: string; sectionId?: SectionId };
 
 export const topPicks: TopPick[] = [
-  { label: 'The AI Original', title: 'EmoLearn', detail: 'Claude AI • Emotion AI • SSE', palette: crimson, projectId: 'emolearn' },
-  { label: 'State-level podium', title: 'Genesis Hackathon', detail: '2nd Place • JSPM RSCOE', palette: amber, sectionId: 'moments' },
-  { label: 'The scholarship finder', title: 'ScholarHub', detail: 'AI matching • EN / HI / MR', palette: ocean, projectId: 'scholarhub' },
-  { label: 'Runner-up', title: 'Recursion Hackathon', detail: '2nd Place • JSPM RSCOE', palette: violet, sectionId: 'moments' },
-  { label: 'Security Original', title: 'CipherPixel', detail: 'LSB steganography engine', palette: jade, projectId: 'cipherpixel' },
+  { label: 'AI Build', title: 'EmoLearn', detail: 'Claude AI, Emotion AI, SSE', palette: crimson, projectId: 'emolearn' },
+  { label: 'State Podium', title: 'Genesis Hackathon', detail: '2nd Place, JSPM RSCOE', palette: amber, sectionId: 'moments' },
+  { label: 'Multilingual AI', title: 'ScholarHub', detail: 'Matching engine, EN / HI / MR', palette: ocean, projectId: 'scholarhub' },
+  { label: 'Hackathon', title: 'Recursion Hackathon', detail: '2nd Place, JSPM RSCOE', palette: violet, sectionId: 'moments' },
+  { label: 'Security Build', title: 'CipherPixel', detail: 'LSB image steganography', palette: jade, projectId: 'cipherpixel' },
   { label: 'Leadership', title: 'Tech Lead', detail: 'Mathematics Club, JSPM RSCOE', palette: amber, sectionId: 'about' },
-  { label: 'The double degree', title: 'IIT Madras', detail: 'BS • Data Science & Management', palette: ocean, sectionId: 'about' },
-  { label: 'Productivity Original', title: 'Focus Flow', detail: 'Pomodoro • Spotify API', palette: crimson, projectId: 'focus-flow' },
-  { label: 'On the leaderboard', title: 'Aayam', detail: '4th Rank • NIT Agartala', palette: violet, sectionId: 'moments' },
-  { label: 'Core stack', title: 'React + Node', detail: 'with Next.js 15, Claude AI & Supabase', palette: jade, sectionId: 'skills' },
+  { label: 'Second Degree', title: 'IIT Madras', detail: 'BS in Data Science & Management', palette: ocean, sectionId: 'about' },
+  { label: 'Productivity', title: 'Focus Flow', detail: 'Pomodoro, Spotify API', palette: crimson, projectId: 'focus-flow' },
+  { label: 'National Event', title: 'Aayam', detail: '4th Rank, NIT Agartala', palette: violet, sectionId: 'moments' },
+  { label: 'Core Stack', title: 'React & Node.js', detail: 'Next.js 15, Claude AI, Supabase', palette: jade, sectionId: 'skills' },
 ];
 
 /** Slides for the "▶ Play Intro" cinematic sequence. */
@@ -536,38 +536,38 @@ export type IntroSlide = { kicker: string; title: string; lines: string[]; chips
 export const introSlides: IntroSlide[] = [
   {
     kicker: 'Education',
-    title: 'B.Tech · Computer Engineering',
+    title: 'B.Tech in Computer Engineering',
     lines: ['JSPM Rajarshi Shahu College of Engineering, Pune', 'Aug 2025 – May 2029'],
     chips: ['JSPM RSCOE'],
   },
   {
-    kicker: 'Skills',
-    title: 'AI meets full-stack.',
-    lines: ['JavaScript, Python, C, C++ · React, Next.js 15, Node.js', 'Supabase, Firebase · Claude AI, GPT APIs, SSE streaming'],
+    kicker: 'Stack',
+    title: 'Full-stack and AI',
+    lines: ['JavaScript, Python, C, C++, React, Next.js 15, Node.js', 'Supabase, Firebase, Claude AI, GPT APIs, SSE streaming'],
     chips: ['React', 'Next.js', 'Node.js', 'Claude AI', 'Supabase', 'Tailwind'],
   },
   {
     kicker: 'Leadership',
     title: 'Tech Lead',
-    lines: ['Mathematics Club · JSPM RSCOE', 'Aug 2026 – Present', 'Leading the club’s technical initiatives'],
+    lines: ['Mathematics Club, JSPM RSCOE', 'Aug 2026 – Present'],
   },
   {
     kicker: 'Projects',
-    title: 'Four Originals',
-    lines: ['ScholarHub — AI scholarship discovery', 'EmoLearn — emotion-adaptive AI tutor', 'CipherPixel — image steganography', 'Focus Flow — gamified Pomodoro dashboard'],
+    title: 'Four Builds',
+    lines: ['ScholarHub: AI scholarship matching', 'EmoLearn: emotion-adaptive AI tutor', 'CipherPixel: image steganography', 'Focus Flow: Pomodoro & Spotify dashboard'],
   },
   {
-    kicker: 'Achievements',
+    kicker: 'Competitions',
     title: 'Top Moments',
-    lines: ['2nd Place — Genesis Hackathon of Impact (2026)', '2nd Place — Recursion Hackathon (2025)', '4th Rank — Aayam, NIT Agartala'],
+    lines: ['2nd Place, Genesis Hackathon of Impact (2026)', '2nd Place, Recursion Hackathon (2025)', '4th Rank, Aayam, NIT Agartala'],
   },
   {
     kicker: 'Hackathons',
-    title: 'Built in 24 hours',
-    lines: ['Working projects under tight deadlines', 'Prototypes designed and deployed from scratch with teammates'],
+    title: '24-Hour Builds',
+    lines: ['Shipping working prototypes under tight deadlines with small teams.'],
   },
   {
-    kicker: 'Also studying',
+    kicker: 'Second Degree',
     title: 'IIT Madras',
     lines: ['BS in Data Science and Management (Online)', 'May 2026 – Present'],
   },
@@ -586,28 +586,28 @@ export const viewerProfiles: {
   {
     id: 'yash',
     name: 'Yash',
-    blurb: 'The full series, in order',
+    blurb: 'Full portfolio, in order',
     color: '#e5132b',
     order: ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'],
   },
   {
     id: 'recruiter',
     name: 'Recruiter',
-    blurb: 'Resume, achievements & skills first',
+    blurb: 'Resume, awards, and skills first',
     color: '#4cc9ff',
     order: ['story', 'moments', 'skills', 'originals', 'about', 'journey', 'picks'],
   },
   {
     id: 'developer',
     name: 'Developer',
-    blurb: 'Projects, stack & GitHub first',
+    blurb: 'Projects, stack, and build notes first',
     color: '#46e3a8',
     order: ['originals', 'skills', 'journey', 'moments', 'about', 'picks', 'story'],
   },
   {
     id: 'creative',
     name: 'Creative',
-    blurb: 'The story arc & highlights first',
+    blurb: 'Timeline and highlights first',
     color: '#ffb547',
     order: ['journey', 'picks', 'originals', 'moments', 'about', 'skills', 'story'],
   },

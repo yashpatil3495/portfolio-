@@ -2,16 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { profile } from '../data/portfolio';
 import { useSmoothScroll } from '../hooks/smoothScroll';
+import { useReducedMotionPref } from '../hooks/useMedia';
 import { EASE, Magnetic, Particles } from './fx';
 import { SeriesMark } from './Poster';
 
 export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollTo } = useSmoothScroll();
+  const reduced = useReducedMotionPref();
   const [copied, setCopied] = useState(false);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.2'] });
-  const spacing = useTransform(scrollYProgress, [0, 1], ['0.6em', '0.02em']);
-  const blur = useTransform(scrollYProgress, [0, 1], ['blur(16px)', 'blur(0px)']);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.25'] });
+  const headingScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [28, 0]);
   const opacity = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
 
   useEffect(() => {
@@ -47,13 +49,13 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        The Next Episode
+        Get in Touch
       </motion.p>
       <motion.h2
-        className="relative font-display leading-[0.85] text-bone"
-        style={{ fontSize: 'clamp(3.4rem, 13vw, 12rem)', letterSpacing: spacing, filter: blur, opacity }}
+        className="relative font-display leading-[0.85] tracking-[0.02em] text-bone"
+        style={reduced ? { fontSize: 'clamp(3.4rem, 13vw, 12rem)' } : { fontSize: 'clamp(3.4rem, 13vw, 12rem)', scale: headingScale, y: headingY, opacity }}
       >
-        TO BE CONTINUED…
+        TO BE CONTINUED
       </motion.h2>
 
       <motion.div
@@ -137,7 +139,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
 
       <div className="relative mt-10 flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-[0.24em] text-smoke">
         <button type="button" onClick={() => scrollTo(0, { offset: 0 })} className="hover:text-bone">
-          ↺ WATCH AGAIN
+          ↺ BACK TO TOP
         </button>
         <button type="button" onClick={onReplay} className="hover:text-bone">
           ▶ REPLAY OPENING
@@ -149,7 +151,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
           <SeriesMark />
         </div>
         <p className="text-[11px] leading-relaxed text-smoke">
-          © {new Date().getFullYear()} {profile.displayName}. A personal, streaming-inspired portfolio — not affiliated with any streaming service.
+          © {new Date().getFullYear()} {profile.displayName}. Built as a streaming-inspired portfolio.
         </p>
       </footer>
     </section>

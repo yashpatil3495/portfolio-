@@ -1,20 +1,21 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { achievements, education, profile, type ProfileId } from '../data/portfolio';
-import { useFinePointer } from '../hooks/useMedia';
+import { useFinePointer, useReducedMotionPref } from '../hooks/useMedia';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { EASE, Magnetic, Particles } from './fx';
 import { SeriesMark } from './Poster';
 
-const container = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.25 } } };
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } } };
 const item = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(10px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: EASE } },
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
 export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => void; onResume: () => void; profileId: ProfileId }) {
   const ref = useRef<HTMLElement>(null);
   const fine = useFinePointer();
+  const reduced = useReducedMotionPref();
   const { scrollTo } = useSmoothScroll();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
@@ -48,13 +49,13 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
       ref={ref}
       className="relative min-h-[100svh] overflow-hidden"
       onPointerMove={(e) => {
-        if (!fine) return;
+        if (!fine || reduced) return;
         mx.set((e.clientX / window.innerWidth) * 2 - 1);
         my.set((e.clientY / window.innerHeight) * 2 - 1);
       }}
     >
       {/* atmosphere */}
-      <motion.div aria-hidden className="absolute inset-0" style={{ x: glowX }}>
+      <motion.div aria-hidden className="absolute inset-0" style={reduced ? undefined : { x: glowX }}>
         <div className="absolute right-[-10%] top-[-10%] h-[90vh] w-[80vw] rounded-full bg-[radial-gradient(closest-side,rgba(229,19,43,0.38),rgba(229,19,43,0.08)_55%,transparent)] blur-2xl lg:right-[-4%] lg:w-[60vw]" />
         <div className="absolute bottom-[-20%] left-[-10%] h-[70vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,rgba(90,20,120,0.25),transparent)] blur-2xl" />
       </motion.div>
@@ -68,14 +69,14 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
       {/* portrait */}
       <motion.div
         className="absolute inset-x-0 top-12 z-[2] flex h-[64svh] items-end justify-center sm:h-[70svh] lg:bottom-0 lg:left-auto lg:right-[3vw] lg:top-20 lg:h-auto lg:w-[54vw] xl:right-[6vw] xl:w-[48vw]"
-        style={{ y: imgY, scale: imgScale, opacity: fade }}
+        style={reduced ? undefined : { y: imgY, scale: imgScale, opacity: fade }}
       >
         <motion.div
           className="relative h-full w-full lg:h-[86vh]"
-          style={{ rotateY: imgRotY, rotateX: imgRotX, x: imgShiftX, transformPerspective: 1200 }}
-          initial={{ clipPath: 'inset(100% -30% -10% -30%)', opacity: 0 }}
+          style={reduced ? undefined : { rotateY: imgRotY, rotateX: imgRotX, x: imgShiftX, transformPerspective: 1200 }}
+          initial={reduced ? { opacity: 1 } : { clipPath: 'inset(100% -30% -10% -30%)', opacity: 0 }}
           animate={{ clipPath: 'inset(-30% -30% -10% -30%)', opacity: 1 }}
-          transition={{ duration: 1.6, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 1.35, ease: EASE, delay: 0.08 }}
         >
           {/* rim light ring */}
           <div aria-hidden className="absolute bottom-[8%] left-1/2 h-[78%] w-[78%] -translate-x-1/2 rounded-full border border-crimson-2/20 shadow-[0_0_120px_rgba(229,19,43,0.35),inset_0_0_80px_rgba(229,19,43,0.18)]" />
@@ -84,15 +85,18 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
             srcSet={profile.portrait.srcSet}
             sizes="(max-width: 1024px) 100vw, 54vw"
             alt={profile.portrait.alt}
-
-            className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_97%)]"
+            width={720}
+            height={693}
+            decoding="async"
+            fetchPriority="high"
+            className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_0_2px_rgba(7,7,10,0.95)] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_97%)]"
           />
           {/* crimson rim light on the image edge */}
           <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_30%,rgba(255,61,90,0.16),transparent_70%)] mix-blend-screen" />
 
           {/* floating UI chips */}
           {floating.map((f, i) => (
-            <FloatChip key={f.text} {...f} index={i} mx={chipX} my={chipY} />
+            <FloatChip key={f.text} {...f} index={i} mx={chipX} my={chipY} reduced={reduced} />
           ))}
         </motion.div>
       </motion.div>
@@ -105,7 +109,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
       {/* copy */}
       <motion.div
         className="gutter relative z-[4] flex min-h-[100svh] flex-col justify-end pb-16 pt-[54svh] sm:pb-20 lg:max-w-[52vw] lg:justify-center lg:pb-0 lg:pt-24"
-        style={{ y: textY, opacity: fade }}
+        style={reduced ? undefined : { y: textY, opacity: fade }}
         variants={container}
         initial="hidden"
         animate="show"
@@ -165,41 +169,43 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         </motion.div>
       </motion.div>
 
-      <motion.div
-        aria-hidden
-        style={{ opacity: fade }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        className="pointer-events-none absolute bottom-20 left-1/2 z-[4] hidden -translate-x-1/2 flex-col items-center gap-1.5 lg:flex"
-      >
-        <span className="text-[9px] font-semibold uppercase tracking-[0.34em] text-smoke">Scroll</span>
-        <motion.span
-          className="block h-5 w-px bg-gradient-to-b from-crimson-2 to-transparent"
-          animate={{ scaleY: [0.5, 1, 0.5], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
+      {!reduced && (
+        <motion.div
+          aria-hidden
+          style={{ opacity: fade }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.7 }}
+          className="pointer-events-none absolute bottom-20 left-1/2 z-[4] hidden -translate-x-1/2 flex-col items-center gap-1.5 lg:flex"
+        >
+          <span className="text-[9px] font-semibold uppercase tracking-[0.34em] text-smoke">Scroll</span>
+          <motion.span
+            className="block h-5 w-px bg-gradient-to-b from-crimson-2 to-transparent"
+            animate={{ scaleY: [0.5, 1, 0.5], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+      )}
 
-      <motion.div aria-hidden className="pointer-events-none absolute inset-0 z-[5] bg-ink" style={{ opacity: blackout }} />
+      {!reduced && <motion.div aria-hidden className="pointer-events-none absolute inset-0 z-[5] bg-ink" style={{ opacity: blackout }} />}
     </section>
   );
 }
 
 type MV = ReturnType<typeof useTransform<number, number>>;
 
-function FloatChip({ text, sub, pos, depth, index, mx, my }: { text: string; sub: string; pos: string; depth: number; index: number; mx: MV; my: MV }) {
+function FloatChip({ text, sub, pos, depth, index, mx, my, reduced }: { text: string; sub: string; pos: string; depth: number; index: number; mx: MV; my: MV; reduced: boolean }) {
   const x = useTransform(mx, (n: number) => n * depth);
   const y = useTransform(my, (n: number) => n * depth);
   return (
     <motion.div
       className={`glass absolute hidden rounded-xl bg-ink/85! px-4 py-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.5)] md:block ${pos}`}
-      style={{ x, y }}
-      initial={{ opacity: 0, filter: 'blur(6px)' }}
-      animate={{ opacity: 1, filter: 'blur(0px)' }}
-      transition={{ duration: 0.9, delay: 1.2 + index * 0.18, ease: EASE }}
+      style={reduced ? undefined : { x, y }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.75, delay: 1 + index * 0.14, ease: EASE }}
     >
-      <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 5 + index, repeat: Infinity, ease: 'easeInOut' }}>
+      <motion.div animate={reduced ? undefined : { y: [0, -6, 0] }} transition={{ duration: 5 + index, repeat: Infinity, ease: 'easeInOut' }}>
         <p className="text-sm font-semibold text-bone">{text}</p>
         <p className="text-[10px] uppercase tracking-[0.2em] text-mist">{sub}</p>
       </motion.div>

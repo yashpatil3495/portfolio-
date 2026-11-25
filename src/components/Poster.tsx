@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Palette, Project } from '../data/portfolio';
+import YPLogo from './YPLogo';
 
 /**
  * Generated "key art" for thumbnails — layered gradients, light falloff and a motif.
@@ -101,13 +102,11 @@ export function ProjectArt({ project, className = '' }: { project: Project; clas
   );
 }
 
-/** Small fictional platform mark used in the nav and on cards. */
+/** Small fictional platform mark used in the nav, hero and footer. */
 export function SeriesMark({ className = '' }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 ${className}`}>
-      <svg viewBox="0 0 24 32" className="h-[1.1em] w-auto" aria-hidden>
-        <path d="M4.5 5 L12 17 L19.5 5 M12 17 V28" fill="none" stroke="#e5132b" strokeWidth="4" strokeLinecap="round" />
-      </svg>
+    <span className={`inline-flex items-center gap-2 ${className}`}>
+      <YPLogo animate={false} className="h-[1.05em] w-auto" />
       <span className="font-sans text-[0.62em] font-bold tracking-[0.36em] text-mist">SERIES</span>
     </span>
   );

@@ -17,7 +17,7 @@ export default function Seasons({ onOpen }: { onOpen: (p: Project) => void }) {
       <SectionHeading
         kicker={`${seasons.length} Seasons`}
         title="My Journey"
-        aside={<p className="max-w-xs text-sm text-mist">Every stage of the resume, told as a season — select one to see its episodes.</p>}
+        aside={<p className="max-w-xs text-sm text-mist">Education, hackathons, and projects arranged in order.</p>}
       />
 
       {/* season selector */}
@@ -59,10 +59,10 @@ export default function Seasons({ onOpen }: { onOpen: (p: Project) => void }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={season.number}
-          initial={{ opacity: 0, x: 40, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, x: -40, filter: 'blur(8px)' }}
-          transition={{ duration: 0.55, ease: EASE }}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -24 }}
+          transition={{ duration: 0.4, ease: EASE }}
         >
           <div className="gutter mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
             <h3 className="font-display text-4xl tracking-wide text-bone sm:text-5xl">

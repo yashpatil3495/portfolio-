@@ -3,18 +3,19 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { profile } from '../data/portfolio';
 import { useReducedMotionPref } from '../hooks/useMedia';
 import { EASE, Magnetic } from './fx';
+import YPLogo from './YPLogo';
 
 /**
  * The signature moment:
- * black → studio card → YASH → THE SERIES → portrait reveal → role → ▶ PLAY
+ * black → studio card (YP logo) → YASH → THE SERIES → portrait reveal → role → ▶ PLAY
  */
 const TIMELINE = [
-  { at: 300, beat: 1 }, // studio card
-  { at: 1900, beat: 2 }, // name
-  { at: 2700, beat: 3 }, // THE SERIES
-  { at: 3400, beat: 4 }, // portrait
-  { at: 4300, beat: 5 }, // role
-  { at: 5000, beat: 6 }, // play button
+  { at: 300, beat: 1 }, // studio card + YP logo
+  { at: 2300, beat: 2 }, // name
+  { at: 3100, beat: 3 }, // THE SERIES
+  { at: 3800, beat: 4 }, // portrait
+  { at: 4700, beat: 5 }, // role
+  { at: 5400, beat: 6 }, // play button
 ];
 
 export default function OpeningSequence({ onDone }: { onDone: () => void }) {
@@ -62,17 +63,18 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
         {beat === 1 && (
           <motion.div
             key="studio"
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex flex-col items-center justify-center gap-5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: 'blur(6px)' }}
-            transition={{ duration: 0.6 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 0.55, ease: EASE }}
           >
+            <YPLogo className="h-20 w-auto sm:h-28" />
             <motion.p
-              className="font-sans text-xs font-semibold text-mist sm:text-sm"
-              initial={{ letterSpacing: '0.2em', opacity: 0 }}
-              animate={{ letterSpacing: '0.6em', opacity: 1 }}
-              transition={{ duration: 1.6, ease: EASE }}
+              className="pl-[0.6em] font-sans text-xs font-semibold tracking-[0.6em] text-mist sm:text-sm"
+              initial={{ scale: 0.92, opacity: 0, y: 6 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
             >
               {profile.originalLabel}
             </motion.p>
@@ -83,17 +85,20 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
       {/* portrait */}
       <motion.div
         className="absolute inset-x-0 bottom-0 z-0 mx-auto flex h-[68vh] max-w-[900px] items-end justify-center"
-        initial={{ opacity: 0, scale: 1.12, filter: 'blur(18px) brightness(0.3)' }}
-        animate={beat >= 4 ? { opacity: 1, scale: 1, filter: 'blur(0px) brightness(1)' } : {}}
-        transition={{ duration: 1.6, ease: EASE }}
+        initial={{ opacity: 0, scale: 1.08 }}
+        animate={beat >= 4 ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 1.3, ease: EASE }}
       >
         <img
           src={profile.portrait.src}
           srcSet={profile.portrait.srcSet}
           sizes="(max-width: 768px) 100vw, 900px"
           alt={profile.portrait.alt}
+          width={720}
+          height={693}
+          decoding="async"
+          fetchPriority="high"
           className="h-full w-auto max-w-none object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_55%,transparent_98%)]"
-
         />
       </motion.div>
       <div aria-hidden className="absolute inset-0 z-[1] bg-[radial-gradient(70%_60%_at_50%_40%,transparent_30%,rgba(0,0,0,0.85)_100%)]" />
@@ -101,19 +106,19 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
       {/* title */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
         <motion.h1
-          className="font-display leading-[0.82] text-bone drop-shadow-[0_8px_40px_rgba(0,0,0,0.8)]"
+          className="font-display leading-[0.82] tracking-[0.04em] text-bone drop-shadow-[0_8px_40px_rgba(0,0,0,0.8)]"
           style={{ fontSize: 'clamp(4.6rem, 20vw, 15rem)' }}
-          initial={{ opacity: 0, scale: 1.3, filter: 'blur(20px)', letterSpacing: '0.5em' }}
-          animate={beat >= 2 ? { opacity: 1, scale: 1, filter: 'blur(0px)', letterSpacing: '0.04em', y: beat >= 4 ? '-30vh' : 0 } : {}}
-          transition={{ duration: 1.3, ease: EASE }}
+          initial={{ opacity: 0, scale: 1.18 }}
+          animate={beat >= 2 ? { opacity: 1, scale: 1, y: beat >= 4 ? '-30vh' : 0 } : {}}
+          transition={{ duration: 1.1, ease: EASE }}
         >
           {profile.firstName}
         </motion.h1>
         <motion.p
-          className="pl-[0.7em] font-sans text-sm font-bold text-crimson-2 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)] sm:text-lg"
-          initial={{ opacity: 0, letterSpacing: '1.4em' }}
-          animate={beat >= 3 ? { opacity: 1, letterSpacing: '0.7em', y: beat >= 4 ? '-30vh' : 0 } : {}}
-          transition={{ duration: 1.1, ease: EASE }}
+          className="pl-[0.7em] font-sans text-sm font-bold tracking-[0.7em] text-crimson-2 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)] sm:text-lg"
+          initial={{ opacity: 0, scale: 1.12 }}
+          animate={beat >= 3 ? { opacity: 1, scale: 1, y: beat >= 4 ? '-30vh' : 0 } : {}}
+          transition={{ duration: 0.95, ease: EASE }}
         >
           {profile.seriesTag}
         </motion.p>

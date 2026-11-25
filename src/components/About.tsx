@@ -28,8 +28,11 @@ export default function About() {
               srcSet={profile.portrait.srcSet}
               sizes="(max-width: 1024px) 90vw, 40vw"
               alt={profile.portrait.alt}
+              width={720}
+              height={693}
               loading="lazy"
-              className="absolute bottom-0 left-1/2 h-[92%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom"
+              decoding="async"
+              className="absolute bottom-0 left-1/2 h-[92%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_0_2px_rgba(7,7,10,0.95)]"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/90 to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
@@ -51,10 +54,10 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: EASE }}
           >
-            “{profile.intro}”
+            I like building software where backend logic and interface design have to work together cleanly, especially when there is a real problem to solve and a tight clock to ship it.
           </motion.p>
           <p className="mt-4 text-sm text-mist">
-            — {profile.fullName} · {experience[0].role}, {experience[0].company} ({experience[0].period}) · {profile.location}, India
+            {profile.fullName} · {experience[0].role}, {experience[0].company} ({experience[0].period}) · {profile.location}, India
           </p>
 
           <motion.dl
@@ -78,7 +81,7 @@ export default function About() {
           </motion.dl>
 
           <div className="mt-8">
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-smoke">Interests</p>
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-smoke">Currently Exploring</p>
             <div className="flex flex-wrap gap-2">
               {profile.interests.map((i) => (
                 <span key={i} className="glass rounded-full px-3 py-1.5 text-xs font-medium text-bone">

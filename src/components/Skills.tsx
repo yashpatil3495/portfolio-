@@ -12,7 +12,7 @@ export default function Skills() {
 
   return (
     <>
-      <SectionHeading kicker="Genres" title="My Skill Universe" aside={<p className="max-w-xs text-sm text-mist">Hover or tap a skill to see where it shows up across projects and certifications.</p>} />
+      <SectionHeading kicker="Stack" title="My Skill Universe" aside={<p className="max-w-xs text-sm text-mist">Select any skill to see where I have used it.</p>} />
 
       <div className="gutter grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-14">
         {/* genre list */}
@@ -84,9 +84,9 @@ function SkillCard({ skill, hue }: { skill: Skill; hue: string }) {
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
       variants={{
-        hidden: { opacity: 0, y: 24, scale: 0.94, filter: 'blur(6px)' },
-        show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { duration: 0.55, ease: EASE } },
-        exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
+        hidden: { opacity: 0, y: 18, scale: 0.96 },
+        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.42, ease: EASE } },
+        exit: { opacity: 0, y: -10, transition: { duration: 0.18 } },
       }}
       whileHover={{ y: -6 }}
       className="group relative flex min-h-[168px] flex-col justify-between overflow-hidden rounded-xl bg-ink-2 p-4 text-left ring-1 ring-white/10 transition-shadow duration-500 hover:ring-white/20"
