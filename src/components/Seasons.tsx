@@ -65,7 +65,7 @@ export default function Seasons({ onOpen }: { onOpen: (p: Project) => void }) {
           transition={{ duration: 0.4, ease: EASE }}
         >
           <div className="gutter mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <h3 className="font-display text-4xl tracking-wide text-bone sm:text-5xl">
+            <h3 className="font-display text-[clamp(2rem,6vw,3.4rem)] tracking-wide text-bone">
               <span className="text-outline mr-3">S{String(season.number).padStart(2, '0')}</span>
               {season.title}
             </h3>

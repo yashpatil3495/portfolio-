@@ -53,7 +53,7 @@ export default function ProfileSelector({ onPick }: { onPick: (id: ProfileId) =>
         Who&apos;s watching?
       </motion.h2>
       <motion.ul
-        className="relative grid grid-cols-2 gap-6 sm:flex sm:gap-8"
+        className="relative grid grid-cols-2 gap-6 sm:flex sm:flex-wrap sm:justify-center sm:gap-8"
         initial="hidden"
         animate="show"
         transition={{ staggerChildren: 0.08, delayChildren: 0.2 }}

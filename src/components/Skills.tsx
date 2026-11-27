@@ -59,7 +59,7 @@ export default function Skills() {
               >
                 <span className="font-semibold text-bone">{category.title}</span> — {category.subtitle}
               </motion.p>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
                 {category.skills.map((s) => (
                   <SkillCard key={s.name} skill={s} hue={hue} />
                 ))}
@@ -103,7 +103,7 @@ function SkillCard({ skill, hue }: { skill: Skill; hue: string }) {
         >
           {skill.mono}
         </motion.span>
-        <span className="relative mt-4 flex items-center gap-2 text-[15px] font-semibold text-bone">
+        <span className="relative mt-4 flex flex-wrap items-center gap-2 text-[15px] font-semibold text-bone">
           {skill.name}
           {skill.note && (
             <span className="rounded px-1.5 py-px text-[9px] font-bold uppercase tracking-wider text-ink" style={{ background: hue }}>

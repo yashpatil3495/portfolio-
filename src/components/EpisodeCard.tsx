@@ -53,7 +53,7 @@ export default function EpisodeCard({ episode, index, onAction }: { episode: Epi
                   ▶
                 </span>
               ) : (
-                <span className="rounded border border-white/15 px-1.5 py-0.5 text-[9px] font-bold tracking-[0.18em] text-smoke">AIRED</span>
+                <span className="rounded border border-white/25 px-1.5 py-0.5 text-[9px] font-bold tracking-[0.18em] text-smoke/80">AIRED</span>
               )}
             </div>
             <p className="text-sm leading-relaxed text-bone/80">{episode.description}</p>

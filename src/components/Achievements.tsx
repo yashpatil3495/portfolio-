@@ -27,6 +27,7 @@ export default function Achievements() {
         {achievements.map((a, i) => (
           <motion.div
             key={a.id}
+            className="h-full"
             initial={{ opacity: 0, y: 50, rotateX: 18 }}
             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             viewport={{ once: true, margin: '-8% 0px' }}
@@ -45,6 +46,7 @@ export default function Achievements() {
                 </div>
                 <h3 className="relative mt-6 font-display text-[2.1rem] leading-[0.92] tracking-wide text-bone">{a.title}</h3>
                 <p className="relative mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#d9b46a]">{a.org}</p>
+                {a.year && <time className="relative mt-1 block text-[11px] font-semibold tabular-nums text-[#d9b46a]/60">{a.year}</time>}
                 <p className="relative mt-4 text-[13px] leading-relaxed text-bone/70">{a.detail}</p>
                 {a.link && (
                   <a

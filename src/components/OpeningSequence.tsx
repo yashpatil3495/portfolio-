@@ -115,7 +115,7 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
           {profile.firstName}
         </motion.h1>
         <motion.p
-          className="pl-[0.7em] font-sans text-sm font-bold tracking-[0.7em] text-crimson-2 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)] sm:text-lg"
+          className="pl-[0.45em] font-sans text-xs font-bold tracking-[0.45em] text-crimson-2 [text-shadow:0_2px_20px_rgba(0,0,0,0.9)] sm:pl-[0.7em] sm:text-lg sm:tracking-[0.7em]"
           initial={{ opacity: 0, scale: 1.12 }}
           animate={beat >= 3 ? { opacity: 1, scale: 1, y: beat >= 4 ? '-30vh' : 0 } : {}}
           transition={{ duration: 0.95, ease: EASE }}
@@ -125,7 +125,7 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
       </div>
 
       {/* role + play */}
-      <div className="absolute inset-x-0 bottom-[9vh] z-20 flex flex-col items-center gap-6 px-4 text-center">
+      <div className="absolute inset-x-0 bottom-[10vh] z-20 flex flex-col items-center gap-4 px-4 text-center sm:gap-6">
         <motion.p
           className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-bone/90 sm:text-sm sm:tracking-[0.4em]"
           initial={{ opacity: 0, y: 14 }}

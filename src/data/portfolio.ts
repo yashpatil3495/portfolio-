@@ -224,6 +224,7 @@ export type Achievement = {
   id: string;
   title: string;
   org: string;
+  year?: string;
   detail: string;
   laurel: string;
   link?: string;
@@ -234,6 +235,7 @@ export const achievements: Achievement[] = [
     id: 'genesis',
     title: '2nd Place',
     org: 'Genesis Hackathon of Impact',
+    year: '2026',
     detail: 'State-level hackathon at JSPM RSCOE, 2026.',
     laurel: 'State Level',
   },
@@ -241,6 +243,7 @@ export const achievements: Achievement[] = [
     id: 'recursion',
     title: '2nd Place',
     org: 'Recursion Hackathon',
+    year: '2025',
     detail: 'JSPM RSCOE, 2025.',
     laurel: 'Runner-Up',
   },

@@ -17,7 +17,7 @@
 
 :root {
   color-scheme: dark;
-  --gutter: clamp(16px, 4vw, 56px);
+  --gutter: max(clamp(16px, 4vw, 56px), calc((100vw - 1520px) / 2));
 }
 
 html {

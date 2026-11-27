@@ -41,6 +41,7 @@ export function ProjectArt({ project, className = '' }: { project: Project; clas
           </radialGradient>
         </defs>
         <circle cx="290" cy="120" r="130" fill={`url(#g-${project.id})`} />
+        <circle cx="90" cy="210" r="110" fill={`url(#g-${project.id})`} opacity="0.28" />
         {project.motif === 'scholar' && (
           <g fill="none" stroke={a}>
             <rect x="208" y="70" width="120" height="150" rx="10" strokeWidth="1.6" strokeOpacity="0.35" transform="rotate(-8 268 145)" />

@@ -115,7 +115,7 @@ export function SectionHeading({ kicker, title, aside }: { kicker: string; title
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-2 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-crimson-2"
+          className="mb-2 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-crimson-2"
         >
           <span className="h-px w-8 bg-crimson-2" />
           {kicker}

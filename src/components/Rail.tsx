@@ -27,18 +27,29 @@ export function RailButtons({ rail }: { rail: RefObject<HTMLDivElement | null> }
   };
 
   const base =
-    'absolute top-8 bottom-8 z-20 hidden w-[var(--gutter)] min-w-10 items-center justify-center bg-gradient-to-r text-3xl text-bone opacity-0 transition duration-300 group-hover/rail:opacity-100 hover:text-white [@media(hover:hover)]:flex';
+    'absolute top-8 bottom-8 z-20 hidden w-[var(--gutter)] min-w-10 items-center justify-center bg-gradient-to-r opacity-0 transition duration-300 group-hover/rail:opacity-100 [@media(hover:hover)]:flex';
+
+  const ChevronLeft = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden className="text-bone transition group-hover/rail:text-white">
+      <path d="M13 4L7 10L13 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+  const ChevronRight = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden className="text-bone transition group-hover/rail:text-white">
+      <path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 
   return (
     <>
       {canLeft && (
         <button type="button" aria-label="Scroll left" onClick={() => page(-1)} className={`${base} left-0 from-ink/90 to-transparent`}>
-          ‹
+          <ChevronLeft />
         </button>
       )}
       {canRight && (
         <button type="button" aria-label="Scroll right" onClick={() => page(1)} className={`${base} right-0 from-transparent to-ink/90`}>
-          ›
+          <ChevronRight />
         </button>
       )}
     </>

@@ -39,8 +39,8 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
 
   const floating = [
     { text: education[0].short, sub: 'BS · Data Science', pos: 'left-[4%] top-[28%] lg:left-[2%] lg:top-[30%]', depth: 1 },
-    { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[4%] top-[18%] lg:right-[0%]', depth: -1 },
-    { text: 'React · Next.js · Node.js', sub: 'Core stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[4%] top-[18%] lg:right-[2%]', depth: -1 },
+    { text: 'React · Next.js · Node.js', sub: 'Core stack', pos: 'right-[4%] bottom-[24%] lg:right-[2%]', depth: 0.6 },
   ];
 
   return (
@@ -108,7 +108,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
 
       {/* copy */}
       <motion.div
-        className="gutter relative z-[4] flex min-h-[100svh] flex-col justify-end pb-16 pt-[54svh] sm:pb-20 lg:max-w-[52vw] lg:justify-center lg:pb-0 lg:pt-24"
+        className="gutter relative z-[4] flex min-h-[100svh] flex-col justify-end pb-14 pt-[48svh] sm:pb-20 sm:pt-[52svh] lg:max-w-[52vw] lg:justify-center lg:pb-0 lg:pt-24"
         style={reduced ? undefined : { y: textY, opacity: fade }}
         variants={container}
         initial="hidden"
@@ -120,7 +120,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         <motion.h1 variants={item} className="font-display leading-[0.82] tracking-[0.02em] text-bone" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)' }}>
           <span className="shimmer-text">{profile.firstName}</span>
         </motion.h1>
-        <motion.p variants={item} className="mt-1 font-sans text-sm font-bold tracking-[0.62em] text-crimson-2 sm:text-base">
+        <motion.p variants={item} className="mt-1 font-sans text-xs font-bold tracking-[0.42em] text-crimson-2 sm:text-base sm:tracking-[0.62em]">
           {profile.seriesTag}
         </motion.p>
 
