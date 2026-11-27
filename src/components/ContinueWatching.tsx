@@ -4,7 +4,7 @@ import { projects, sectionMeta, topPicks, type SectionId } from '../data/portfol
 import { useWatchProgress } from '../hooks/sectionProgress';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { useFinePointer } from '../hooks/useMedia';
-import { EASE, RevealText } from './fx';
+import { EASE } from './fx';
 import { PlayIcon } from './Icons';
 import { PosterBackdrop } from './Poster';
 import { RailButtons } from './Rail';
@@ -22,7 +22,7 @@ export default function ContinueWatching({ order }: { order: SectionId[] }) {
     <section aria-labelledby="continue-title" className="relative z-10 -mt-2 pb-10 sm:-mt-4">
       <div className="gutter mb-4 flex items-end justify-between">
         <h2 id="continue-title" className="font-sans text-lg font-semibold tracking-tight text-bone sm:text-2xl">
-          <RevealText text="Continue Exploring" />
+          Continue Exploring
         </h2>
         <span className="hidden text-xs text-smoke sm:block">Tracks what you have read so far</span>
       </div>

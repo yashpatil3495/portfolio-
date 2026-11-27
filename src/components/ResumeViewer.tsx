@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { achievements, certifications, education, experience, profile, projects, skillCategories } from '../data/portfolio';
-import { EASE, Magnetic, SectionHeading } from './fx';
+import { Magnetic, ScrollReveal, SectionHeading } from './fx';
 import { DownloadIcon, PlayIcon } from './Icons';
 
 /** THE FULL STORY — a designed resume preview plus view / download actions. */
@@ -10,15 +9,9 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
     <>
       <SectionHeading kicker="Resume" title="The Full Story" />
       <div className="gutter grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
-        <motion.div
-          initial={{ opacity: 0, y: 60, rotateX: 10 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: true, margin: '-10% 0px' }}
-          transition={{ duration: 1.1, ease: EASE }}
-          style={{ transformPerspective: 1600 }}
-        >
+        <ScrollReveal y={32} duration={0.65}>
           <CollapsibleSheet />
-        </motion.div>
+        </ScrollReveal>
 
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="font-serif text-3xl italic leading-tight text-bone">Everything on one page.</p>

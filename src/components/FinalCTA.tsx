@@ -70,56 +70,46 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
           <p className="mt-2 pl-[0.22em] text-[11px] font-semibold tracking-[0.22em] text-mist sm:pl-[0.4em] sm:text-sm sm:tracking-[0.4em]">{profile.role.toUpperCase()}</p>
         </motion.div>
 
-        <motion.div
-          className="relative mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.08, delayChildren: 0.35 }}
-        >
+        <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
           {ctas.map((c) => (
-            <motion.div key={c.label} variants={{ hidden: { opacity: 0, y: 20, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } } }}>
-              <Magnetic>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith('http') ? '_blank' : undefined}
-                  rel={c.href.startsWith('http') ? 'noreferrer' : undefined}
-                  data-cursor={c.cursor}
-                  className={`flex min-h-12 items-center gap-2 rounded-full px-5 text-xs font-bold tracking-[0.12em] transition sm:px-7 sm:text-sm ${
-                    c.primary ? 'bg-crimson text-white shadow-[0_0_50px_rgba(229,19,43,0.5)] hover:bg-crimson-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
-                  }`}
-                >
-                  {c.primary && <PlayIcon className="h-3.5 w-3.5" />}
-                  {c.label.toUpperCase()}
-                  {!c.primary && <ArrowUpRightIcon className="h-3.5 w-3.5 text-mist" />}
-                </a>
-              </Magnetic>
-            </motion.div>
+            <Magnetic key={c.label}>
+              <a
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel={c.href.startsWith('http') ? 'noreferrer' : undefined}
+                data-cursor={c.cursor}
+                className={`flex min-h-12 items-center gap-2 rounded-full px-5 text-xs font-bold tracking-[0.12em] transition sm:px-7 sm:text-sm ${
+                  c.primary ? 'bg-crimson text-white shadow-[0_0_50px_rgba(229,19,43,0.5)] hover:bg-crimson-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
+                }`}
+              >
+                {c.primary && <PlayIcon className="h-3.5 w-3.5" />}
+                {c.label.toUpperCase()}
+                {!c.primary && <ArrowUpRightIcon className="h-3.5 w-3.5 text-mist" />}
+              </a>
+            </Magnetic>
           ))}
 
-          <motion.div variants={{ hidden: { opacity: 0, y: 20, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } } }}>
-            <Magnetic>
-              <button
-                type="button"
-                onClick={copyEmail}
-                aria-label="Copy email address"
-                title={`Copy ${profile.email}`}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 text-bone transition hover:border-crimson-2 hover:bg-crimson/15 hover:text-crimson-2"
-              >
-                {copied ? (
-                  <svg className="h-4 w-4 text-crimson-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                ) : (
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                  </svg>
-                )}
-              </button>
-            </Magnetic>
-          </motion.div>
-        </motion.div>
+          <Magnetic>
+            <button
+              type="button"
+              onClick={copyEmail}
+              aria-label="Copy email address"
+              title={`Copy ${profile.email}`}
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 text-bone transition hover:border-crimson-2 hover:bg-crimson/15 hover:text-crimson-2"
+            >
+              {copied ? (
+                <svg className="h-4 w-4 text-crimson-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+              )}
+            </button>
+          </Magnetic>
+        </div>
 
         <div className="relative mt-4 flex h-8 items-center justify-center">
           <AnimatePresence>

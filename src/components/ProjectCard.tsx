@@ -1,20 +1,15 @@
 import { motion } from 'framer-motion';
 import type { Project } from '../data/portfolio';
-import { EASE, Tilt } from './fx';
+import { ScrollReveal, Tilt } from './fx';
 import { ArrowUpRightIcon, PlayIcon } from './Icons';
 import { ProjectArt } from './Poster';
 import YPLogo from './YPLogo';
 
 export default function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   return (
-    <motion.article
-      className="w-[84vw] shrink-0 snap-start sm:w-[62vw] lg:w-[46vw] xl:w-[42vw]"
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '0px -10% 0px 0px' }}
-      transition={{ duration: 0.7, delay: Math.min(index, 3) * 0.06, ease: EASE }}
-    >
-      <Tilt max={5} className="group rounded-2xl">
+    <article className="w-[84vw] shrink-0 snap-start sm:w-[62vw] lg:w-[46vw] xl:w-[42vw]">
+      <ScrollReveal y={32} delay={Math.min(index, 3) * 0.08} duration={0.6}>
+        <Tilt max={5} className="group rounded-2xl">
         <div
           role="button"
           tabIndex={0}
@@ -74,6 +69,7 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
           </div>
         </div>
       </Tilt>
-    </motion.article>
+      </ScrollReveal>
+    </article>
   );
 }

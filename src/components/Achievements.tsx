@@ -1,7 +1,6 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import { achievements, certifications } from '../data/portfolio';
-import { EASE, SectionHeading, Tilt } from './fx';
+import { ScrollReveal, SectionHeading, Tilt } from './fx';
 import { ArrowUpRightIcon } from './Icons';
 import { RailButtons } from './Rail';
 
@@ -24,16 +23,9 @@ export default function Achievements() {
     <>
       <SectionHeading kicker="Recognition" title="Top Moments" />
 
-      <div className="gutter grid gap-4 sm:grid-cols-2 lg:grid-cols-3 [perspective:1400px]">
+      <div className="gutter grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {achievements.map((a, i) => (
-          <motion.div
-            key={a.id}
-            className="h-full"
-            initial={{ opacity: 0, y: 50, rotateX: 18 }}
-            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-            viewport={{ once: true, margin: '-8% 0px' }}
-            transition={{ duration: 0.9, delay: i * 0.08, ease: EASE }}
-          >
+          <ScrollReveal key={a.id} y={28} delay={i * 0.08} duration={0.6} className="h-full">
             <Tilt max={8} className="group h-full rounded-2xl">
               <article className="relative flex h-full min-h-[340px] flex-col items-center overflow-hidden rounded-2xl bg-[radial-gradient(120%_80%_at_50%_0%,#2a1f10,#0d0b08_60%,#07070a)] px-5 pb-6 pt-8 text-center ring-1 ring-[#d9b46a]/20 transition duration-500 group-hover:ring-[#d9b46a]/60">
                 <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d9b46a]/70 to-transparent" />
@@ -62,7 +54,7 @@ export default function Achievements() {
                 )}
               </article>
             </Tilt>
-          </motion.div>
+          </ScrollReveal>
         ))}
       </div>
 
@@ -83,7 +75,7 @@ export default function Achievements() {
                 : 'rail gutter flex snap-x gap-3 overflow-x-auto py-5'
             }
           >
-            {certifications.map((c, i) => {
+            {certifications.map((c) => {
               const cardContent = (
                 <>
                   <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
@@ -94,29 +86,22 @@ export default function Achievements() {
                   <p className="mt-6 text-sm font-medium leading-snug text-bone">{c.name}</p>
                 </>
               );
-              const motionProps = {
-                initial: { opacity: 0, y: 20 },
-                whileInView: { opacity: 1, y: 0 },
-                viewport: { once: true },
-                transition: { duration: 0.5, delay: Math.min(i, 6) * 0.04, ease: EASE },
-              };
               const baseClass = 'group relative flex w-full max-w-[280px] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-xl bg-ink-2 p-4 ring-1 ring-white/10 transition sm:w-[240px]';
               return c.link ? (
-                <motion.a
+                <a
                   key={c.name}
                   href={c.link}
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="link"
                   className={`${baseClass} hover:-translate-y-1 hover:ring-white/30`}
-                  {...motionProps}
                 >
                   {cardContent}
-                </motion.a>
+                </a>
               ) : (
-                <motion.div key={c.name} className={`${baseClass} hover:ring-white/20`} {...motionProps}>
+                <div key={c.name} className={`${baseClass} hover:ring-white/20`}>
                   {cardContent}
-                </motion.div>
+                </div>
               );
             })}
           </div>

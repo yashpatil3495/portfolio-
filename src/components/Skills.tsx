@@ -95,15 +95,13 @@ function SkillCard({ skill, hue }: { skill: Skill; hue: string }) {
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       <div>
         <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-2xl transition duration-500 group-hover:opacity-60" style={{ background: hue }} />
-        <motion.span
-          className="relative flex h-12 w-12 items-center justify-center rounded-lg font-display text-2xl tracking-wide"
+        <span
+          className="relative flex h-12 w-12 items-center justify-center rounded-lg font-display text-2xl tracking-wide transition-transform duration-300 group-hover:scale-105"
           style={{ background: `${hue}1f`, color: hue, boxShadow: `inset 0 0 0 1px ${hue}55` }}
-          animate={open ? { rotate: [0, -8, 8, 0], scale: 1.08 } : { rotate: 0, scale: 1 }}
-          transition={{ duration: 0.5 }}
           aria-hidden
         >
           {skill.mono}
-        </motion.span>
+        </span>
         <span className="relative mt-4 flex flex-wrap items-center gap-2 text-[15px] font-semibold text-bone">
           {skill.name}
           {skill.note && (

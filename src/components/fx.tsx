@@ -1,8 +1,79 @@
-import { useEffect, useRef, type ReactNode, type PointerEvent as RPointerEvent } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type PointerEvent as RPointerEvent } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, type HTMLMotionProps } from 'framer-motion';
 import { useFinePointer, useReducedMotionPref } from '../hooks/useMedia';
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * Direction-aware scroll reveal:
+ * - Downscroll: element enters from +y (below) and moves up into position.
+ * - Upscroll: element enters from -y (above) and moves down into position.
+ * - Reverses naturally when leaving the viewport without abrupt resets or flicker.
+ */
+export function ScrollReveal({
+  children,
+  y = 28,
+  duration = 0.6,
+  delay = 0,
+  className = '',
+}: {
+  children: ReactNode;
+  y?: number;
+  duration?: number;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotionPref();
+  const [inView, setInView] = useState(false);
+  const [offY, setOffY] = useState(y);
+
+  useEffect(() => {
+    if (reduced) {
+      setInView(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+
+    // Set initial offscreen direction based on current position relative to viewport
+    const initialRect = el.getBoundingClientRect();
+    if (initialRect.bottom < 0) setOffY(-y);
+    else setOffY(y);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        } else {
+          // Track which side of the viewport the element exited from
+          setOffY(entry.boundingClientRect.top < 0 ? -y : y);
+          setInView(false);
+        }
+      },
+      { threshold: 0.08, rootMargin: '-24px 0px -24px 0px' },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [y, reduced]);
+
+  if (reduced) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y }}
+      animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : offY }}
+      transition={{ duration, delay: inView ? delay : 0, ease: EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 /** Wraps a control so it drifts toward the pointer — desktop only. */
 export function Magnetic({ children, strength = 0.35, className = '' }: { children: ReactNode; strength?: number; className?: string }) {
@@ -73,34 +144,13 @@ export function Tilt({
   );
 }
 
-/** Word-by-word blur-to-focus reveal for headings. */
+/** Clean single-block directional reveal for headings (no per-word splitting). */
 export function RevealText({ text, className = '', delay = 0, as = 'span' }: { text: string; className?: string; delay?: number; as?: 'span' | 'h2' | 'h3' | 'p' }) {
-  const Tag = motion[as];
-  const words = text.split(' ');
+  const Tag = as;
   return (
-    <Tag
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: '-4% 0px' }}
-      transition={{ staggerChildren: 0.045, delayChildren: delay }}
-      aria-label={text}
-    >
-      {words.map((w, i) => (
-        <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-          <motion.span
-            className="inline-block"
-            variants={{
-              hidden: { y: '105%', opacity: 0 },
-              show: { y: '0%', opacity: 1, transition: { duration: 0.68, ease: EASE } },
-            }}
-          >
-            {w}
-            {i < words.length - 1 ? ' ' : ''}
-          </motion.span>
-        </span>
-      ))}
-    </Tag>
+    <ScrollReveal y={24} duration={0.6} delay={delay}>
+      <Tag className={className}>{text}</Tag>
+    </ScrollReveal>
   );
 }
 
@@ -108,24 +158,20 @@ export function RevealText({ text, className = '', delay = 0, as = 'span' }: { t
 export function SectionHeading({ kicker, title, aside }: { kicker: string; title: string; aside?: ReactNode }) {
   const headingId = `heading-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
   return (
-    <div aria-labelledby={headingId} className="gutter mb-10 flex flex-wrap items-end justify-between gap-4 md:mb-14">
-      <div>
-        <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mb-2 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-crimson-2"
-        >
-          <span className="h-px w-8 bg-crimson-2" />
-          {kicker}
-        </motion.div>
-        <h2 id={headingId} className="font-display text-[clamp(2.4rem,6vw,5rem)] leading-[0.9] tracking-wide text-bone">
-          <RevealText text={title} />
-        </h2>
+    <ScrollReveal y={24} duration={0.6}>
+      <div aria-labelledby={headingId} className="gutter mb-10 flex flex-wrap items-end justify-between gap-4 md:mb-14">
+        <div>
+          <div className="mb-2 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-crimson-2">
+            <span className="h-px w-8 bg-crimson-2" />
+            {kicker}
+          </div>
+          <h2 id={headingId} className="font-display text-[clamp(2.4rem,6vw,5rem)] leading-[0.9] tracking-wide text-bone">
+            {title}
+          </h2>
+        </div>
+        {aside}
       </div>
-      {aside}
-    </div>
+    </ScrollReveal>
   );
 }
 

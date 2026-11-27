@@ -20,9 +20,9 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
   const { scrollTo } = useSmoothScroll();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.04]);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-22%']);
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const blackout = useTransform(scrollYProgress, [0.35, 1], [0, 1]);
 

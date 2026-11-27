@@ -127,9 +127,9 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                   <motion.div
                     key={m.label}
                     className="bg-ink p-4 sm:p-5"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + i * 0.07, duration: 0.5, ease: EASE }}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 + i * 0.06, duration: 0.5, ease: EASE }}
                   >
                     <p className="font-display text-4xl leading-none text-bone sm:text-5xl" style={{ color: i === 0 ? project.palette.accent : undefined }}>
                       {m.value}

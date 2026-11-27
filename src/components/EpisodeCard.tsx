@@ -1,19 +1,14 @@
-import { motion } from 'framer-motion';
 import type { Episode } from '../data/portfolio';
-import { EASE, Tilt } from './fx';
+import { ScrollReveal, Tilt } from './fx';
 import { PlayIcon } from './Icons';
 import { PosterBackdrop } from './Poster';
 
 export default function EpisodeCard({ episode, index, onAction }: { episode: Episode; index: number; onAction?: () => void }) {
   const [season, ep] = episode.code.split(' ');
   return (
-    <motion.article
-      className="w-[80vw] shrink-0 snap-start sm:w-[52vw] md:w-[38vw] lg:w-[30vw] xl:w-[26vw]"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay: Math.min(index, 4) * 0.07, ease: EASE }}
-    >
-      <Tilt max={7} className="group h-full rounded-xl">
+    <article className="w-[80vw] shrink-0 snap-start sm:w-[52vw] md:w-[38vw] lg:w-[30vw] xl:w-[26vw]">
+      <ScrollReveal y={24} delay={Math.min(index, 4) * 0.06} duration={0.55} className="h-full">
+        <Tilt max={7} className="group h-full rounded-xl">
         <div
           role={onAction ? 'button' : undefined}
           tabIndex={onAction ? 0 : undefined}
@@ -69,6 +64,7 @@ export default function EpisodeCard({ episode, index, onAction }: { episode: Epi
           </div>
         </div>
       </Tilt>
-    </motion.article>
+      </ScrollReveal>
+    </article>
   );
 }
