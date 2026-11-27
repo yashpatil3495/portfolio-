@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { achievements, certifications, education, experience, profile, projects, skillCategories } from '../data/portfolio';
 import { EASE, Magnetic, SectionHeading } from './fx';
+import { DownloadIcon, PlayIcon } from './Icons';
 
 /** THE FULL STORY — a designed resume preview plus view / download actions. */
 export default function ResumeSection({ onView }: { onView: () => void }) {
@@ -32,7 +33,7 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
                 onClick={onView}
                 className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-bone px-6 text-[15px] font-bold text-ink transition hover:bg-white"
               >
-                ▶ View Resume
+                <PlayIcon className="h-3.5 w-3.5" /> View Resume
               </button>
             </Magnetic>
             <Magnetic className="w-full">
@@ -42,7 +43,7 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
                 data-cursor="link"
                 className="glass flex min-h-12 w-full items-center justify-center gap-2 rounded-md px-6 text-[15px] font-semibold text-bone transition hover:bg-white/15"
               >
-                ⤓ Download Resume
+                <DownloadIcon className="h-4 w-4" /> Download Resume
               </a>
             </Magnetic>
           </div>

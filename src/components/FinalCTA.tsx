@@ -4,6 +4,7 @@ import { profile } from '../data/portfolio';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { useReducedMotionPref } from '../hooks/useMedia';
 import { EASE, Magnetic, Particles } from './fx';
+import { ArrowUpRightIcon, PlayIcon, ReplayIcon } from './Icons';
 import { SeriesMark } from './Poster';
 
 export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
@@ -89,9 +90,9 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
                     c.primary ? 'bg-crimson text-white shadow-[0_0_50px_rgba(229,19,43,0.5)] hover:bg-crimson-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
                   }`}
                 >
-                  {c.primary && <span>▶</span>}
+                  {c.primary && <PlayIcon className="h-3.5 w-3.5" />}
                   {c.label.toUpperCase()}
-                  {!c.primary && <span className="text-mist">↗</span>}
+                  {!c.primary && <ArrowUpRightIcon className="h-3.5 w-3.5 text-mist" />}
                 </a>
               </Magnetic>
             </motion.div>
@@ -139,11 +140,11 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
         </div>
 
         <div className="relative mt-8 flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-[0.2em] text-smoke sm:mt-10 sm:tracking-[0.24em]">
-          <button type="button" onClick={() => scrollTo(0, { offset: 0 })} className="hover:text-bone">
-            ↺ BACK TO TOP
+          <button type="button" onClick={() => scrollTo(0, { offset: 0 })} className="inline-flex items-center gap-1.5 hover:text-bone">
+            <ReplayIcon className="h-3.5 w-3.5" /> BACK TO TOP
           </button>
-          <button type="button" onClick={onReplay} className="hover:text-bone">
-            ▶ REPLAY OPENING
+          <button type="button" onClick={onReplay} className="inline-flex items-center gap-1.5 hover:text-bone">
+            <PlayIcon className="h-3 w-3" /> REPLAY OPENING
           </button>
         </div>
       </div>

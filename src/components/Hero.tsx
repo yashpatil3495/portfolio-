@@ -4,6 +4,7 @@ import { achievements, education, profile, type ProfileId } from '../data/portfo
 import { useFinePointer, useReducedMotionPref } from '../hooks/useMedia';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { EASE, Magnetic, Particles } from './fx';
+import { DownloadIcon, PlayIcon, PlusIcon } from './Icons';
 import { SeriesMark } from './Poster';
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } } };
@@ -79,7 +80,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
           transition={{ duration: 1.35, ease: EASE, delay: 0.08 }}
         >
           {/* rim light ring */}
-          <div aria-hidden className="absolute bottom-[8%] left-1/2 h-[78%] w-[78%] -translate-x-1/2 rounded-full border border-crimson-2/20 shadow-[0_0_120px_rgba(229,19,43,0.35),inset_0_0_80px_rgba(229,19,43,0.18)]" />
+          <div aria-hidden className="absolute bottom-[8%] left-1/2 h-[72%] w-[72%] -translate-x-1/2 rounded-full border border-crimson-2/20 shadow-[0_0_120px_rgba(229,19,43,0.35),inset_0_0_80px_rgba(229,19,43,0.18)] sm:h-[78%] sm:w-[78%]" />
           <img
             src={profile.portrait.src}
             srcSet={profile.portrait.srcSet}
@@ -140,13 +141,13 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
               onClick={onPlay}
               className="flex min-h-12 items-center gap-3 rounded-md bg-bone px-6 py-3 text-[15px] font-bold text-ink transition hover:bg-white sm:px-8"
             >
-              <span className="text-lg">▶</span> Play Intro
+              <PlayIcon className="h-4 w-4" /> Play Intro
             </button>
           </Magnetic>
           <Magnetic>
             {profileId === 'recruiter' ? (
               <button type="button" onClick={onResume} className="glass flex min-h-12 items-center gap-3 rounded-md px-6 py-3 text-[15px] font-semibold text-bone transition hover:bg-white/15 sm:px-8">
-                <span className="text-lg">⤓</span> View Resume
+                <DownloadIcon className="h-4 w-4" /> View Resume
               </button>
             ) : (
               <button
@@ -154,7 +155,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
                 onClick={() => scrollTo('#originals')}
                 className="glass flex min-h-12 items-center gap-3 rounded-md px-6 py-3 text-[15px] font-semibold text-bone transition hover:bg-white/15 sm:px-8"
               >
-                <span className="text-xl leading-none">＋</span> My Work
+                <PlusIcon className="h-4 w-4" /> My Work
               </button>
             )}
           </Magnetic>

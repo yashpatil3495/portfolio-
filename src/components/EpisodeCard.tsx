@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Episode } from '../data/portfolio';
 import { EASE, Tilt } from './fx';
+import { PlayIcon } from './Icons';
 import { PosterBackdrop } from './Poster';
 
 export default function EpisodeCard({ episode, index, onAction }: { episode: Episode; index: number; onAction?: () => void }) {
@@ -29,10 +30,11 @@ export default function EpisodeCard({ episode, index, onAction }: { episode: Epi
               : undefined
           }
           aria-label={onAction ? `Explore ${episode.title}` : undefined}
-          className={`flex h-full flex-col overflow-hidden rounded-xl bg-ink-2 ring-1 ring-white/10 transition duration-500 group-hover:ring-crimson-2/60 ${
+          className={`relative flex h-full flex-col overflow-hidden rounded-xl bg-ink-2 ring-1 ring-white/10 transition duration-500 group-hover:ring-crimson-2/60 ${
             onAction ? 'focus-ring cursor-pointer' : ''
           }`}
         >
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
           <div className="relative aspect-video overflow-hidden">
             <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[var(--ease-cine)] group-hover:scale-110">
               <PosterBackdrop palette={episode.palette}>
@@ -49,8 +51,8 @@ export default function EpisodeCard({ episode, index, onAction }: { episode: Epi
             <div className="mb-2 flex items-center justify-between text-[11px] text-smoke">
               <span className="font-semibold text-mist">{episode.runtime}</span>
               {onAction ? (
-                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 text-[10px] text-bone transition group-hover:border-bone group-hover:bg-bone group-hover:text-ink">
-                  ▶
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 text-bone transition group-hover:border-bone group-hover:bg-bone group-hover:text-ink">
+                  <PlayIcon className="h-2.5 w-2.5 translate-x-px" />
                 </span>
               ) : (
                 <span className="rounded border border-white/25 px-1.5 py-0.5 text-[9px] font-bold tracking-[0.18em] text-smoke/80">AIRED</span>

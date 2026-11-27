@@ -5,6 +5,7 @@ import { useSmoothScroll } from '../hooks/smoothScroll';
 import { SeriesMark } from './Poster';
 import { ProfileAvatar } from './ProfileSelector';
 import { EASE } from './fx';
+import { ChevronDownIcon } from './Icons';
 
 export default function Navbar({ order, profileId, onSwitch }: { order: SectionId[]; profileId: ProfileId; onSwitch: (id: ProfileId) => void }) {
   const { scrollY, scrollYProgress } = useScroll();
@@ -123,8 +124,8 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
               className="flex items-center gap-2 rounded-md p-1"
             >
               <ProfileAvatar id={profileId} size="sm" />
-              <motion.span animate={{ rotate: menu ? 180 : 0 }} className="text-[10px] text-mist">
-                ▼
+              <motion.span animate={{ rotate: menu ? 180 : 0 }} className="text-mist">
+                <ChevronDownIcon className="h-3 w-3" />
               </motion.span>
             </button>
             <AnimatePresence>

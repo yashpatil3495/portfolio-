@@ -34,7 +34,7 @@ export default function TopPicks({ onOpen }: { onOpen: (p: Project) => void }) {
               >
                 <span
                   aria-hidden
-                  className="text-outline -mr-6 select-none font-display leading-[0.78] transition duration-500 [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] group-hover:[-webkit-text-stroke-color:rgba(255,61,90,0.85)] sm:-mr-8"
+                  className="text-outline -mr-6 select-none font-display leading-[0.78] transition duration-500 [-webkit-text-stroke-width:1.5px] [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] group-hover:[-webkit-text-stroke-color:rgba(255,61,90,0.85)] sm:-mr-8 sm:[-webkit-text-stroke-width:2px]"
                   style={{
                     fontSize: i === topPicks.length - 1 && topPicks.length >= 10 ? 'clamp(9rem, 22vw, 15rem)' : 'clamp(11rem, 26vw, 19rem)',
                     letterSpacing: i === topPicks.length - 1 && topPicks.length >= 10 ? '-0.06em' : 0,

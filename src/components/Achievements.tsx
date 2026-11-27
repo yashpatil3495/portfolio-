@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { achievements, certifications } from '../data/portfolio';
 import { EASE, SectionHeading, Tilt } from './fx';
+import { ArrowUpRightIcon } from './Icons';
 import { RailButtons } from './Rail';
 
 function Laurel({ side }: { side: 'l' | 'r' }) {
@@ -56,7 +57,7 @@ export default function Achievements() {
                     data-cursor="link"
                     className="relative mt-auto inline-flex min-h-10 items-center gap-1 pt-5 text-xs font-semibold tracking-wide text-bone underline decoration-[#d9b46a]/60 underline-offset-4 hover:decoration-[#d9b46a]"
                   >
-                    View certificate ↗
+                    View certificate <ArrowUpRightIcon className="h-3.5 w-3.5" />
                   </a>
                 )}
               </article>
@@ -82,26 +83,42 @@ export default function Achievements() {
                 : 'rail gutter flex snap-x gap-3 overflow-x-auto py-5'
             }
           >
-            {certifications.map((c, i) => (
-              <motion.a
-                key={c.name}
-                href={c.link}
-                target="_blank"
-                rel="noreferrer"
-                data-cursor={c.link ? 'link' : undefined}
-                className="group relative flex w-full max-w-[280px] shrink-0 snap-start flex-col justify-between rounded-xl bg-ink-2 p-4 ring-1 ring-white/10 transition hover:-translate-y-1 hover:ring-white/30 sm:w-[240px]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: Math.min(i, 6) * 0.04, ease: EASE }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-crimson-2">{c.issuer}</span>
-                  {c.link && <span className="text-sm text-smoke transition group-hover:text-bone">↗</span>}
-                </div>
-                <p className="mt-6 text-sm font-medium leading-snug text-bone">{c.name}</p>
-              </motion.a>
-            ))}
+            {certifications.map((c, i) => {
+              const cardContent = (
+                <>
+                  <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-crimson-2">{c.issuer}</span>
+                    {c.link && <ArrowUpRightIcon className="h-3.5 w-3.5 text-smoke transition group-hover:text-bone" />}
+                  </div>
+                  <p className="mt-6 text-sm font-medium leading-snug text-bone">{c.name}</p>
+                </>
+              );
+              const motionProps = {
+                initial: { opacity: 0, y: 20 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true },
+                transition: { duration: 0.5, delay: Math.min(i, 6) * 0.04, ease: EASE },
+              };
+              const baseClass = 'group relative flex w-full max-w-[280px] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-xl bg-ink-2 p-4 ring-1 ring-white/10 transition sm:w-[240px]';
+              return c.link ? (
+                <motion.a
+                  key={c.name}
+                  href={c.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="link"
+                  className={`${baseClass} hover:-translate-y-1 hover:ring-white/30`}
+                  {...motionProps}
+                >
+                  {cardContent}
+                </motion.a>
+              ) : (
+                <motion.div key={c.name} className={`${baseClass} hover:ring-white/20`} {...motionProps}>
+                  {cardContent}
+                </motion.div>
+              );
+            })}
           </div>
           {certifications.length > 2 && <RailButtons rail={rail} />}
         </div>

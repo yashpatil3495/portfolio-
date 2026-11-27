@@ -18,7 +18,7 @@ export default function Originals({ onOpen }: { onOpen: (p: Project) => void }) 
 function Intro() {
   return (
     <div className="flex w-full shrink-0 flex-col justify-center lg:w-[34vw]">
-      <p className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-crimson-2">
+      <p className="mb-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-crimson-2">
         <span className="h-px w-8 bg-crimson-2" /> {projects.length} Originals · {projectYears}
       </p>
       <RevealText as="h2" text="ORIGINALS" className="font-display text-[clamp(3.5rem,9vw,8rem)] leading-[0.85] text-bone" />

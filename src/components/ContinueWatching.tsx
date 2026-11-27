@@ -5,6 +5,7 @@ import { useWatchProgress } from '../hooks/sectionProgress';
 import { useSmoothScroll } from '../hooks/smoothScroll';
 import { useFinePointer } from '../hooks/useMedia';
 import { EASE, RevealText } from './fx';
+import { PlayIcon } from './Icons';
 import { PosterBackdrop } from './Poster';
 import { RailButtons } from './Rail';
 
@@ -26,7 +27,7 @@ export default function ContinueWatching({ order }: { order: SectionId[] }) {
         <span className="hidden text-xs text-smoke sm:block">Tracks what you have read so far</span>
       </div>
       <div className="group/rail relative">
-        <div ref={rail} className="rail gutter flex snap-x snap-mandatory gap-3 overflow-x-auto py-8 sm:gap-4" data-cursor={fine ? undefined : 'drag'}>
+        <div ref={rail} className="rail gutter flex snap-x snap-mandatory gap-3 overflow-x-auto py-5 sm:gap-4 sm:py-7" data-cursor={fine ? undefined : 'drag'}>
           {order.map((id, i) => {
             const meta = sectionMeta[id];
             const p = progress[id] ?? 0;
@@ -63,8 +64,8 @@ export default function ContinueWatching({ order }: { order: SectionId[] }) {
                       {meta.meta}
                     </span>
                   </div>
-                  <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-black/40 text-xs text-bone backdrop-blur transition duration-500 group-hover:scale-110 group-hover:border-bone group-hover:bg-bone group-hover:text-ink">
-                    ▶
+                  <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-black/40 text-bone backdrop-blur transition duration-500 group-hover:scale-110 group-hover:border-bone group-hover:bg-bone group-hover:text-ink">
+                    <PlayIcon className="h-3 w-3 translate-x-px" />
                   </span>
                 </div>
                 <div className="mt-2 h-[3px] w-full overflow-hidden rounded bg-white/15">

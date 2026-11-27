@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { projects, type Project } from '../data/portfolio';
 import { useScrollLock } from '../hooks/smoothScroll';
 import { EASE, Magnetic } from './fx';
+import { ArrowUpRightIcon } from './Icons';
 import { ProjectArt } from './Poster';
 import YPLogo from './YPLogo';
 
@@ -90,7 +91,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
 
           <motion.div className="px-5 pb-12 sm:px-10" initial="hidden" animate="show" transition={{ staggerChildren: 0.08, delayChildren: 0.25 }}>
             <motion.div variants={block} className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-mist">
-              <span className="font-semibold text-[#46e3a8]">{project.year}</span>
+              <span className="font-semibold" style={{ color: project.palette.accent }}>{project.year}</span>
               <span className="h-1 w-1 rounded-full bg-smoke" />
               <span>{project.genre}</span>
             </motion.div>
@@ -109,7 +110,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                     data-cursor="link"
                     className="flex min-h-12 items-center gap-2 rounded-md bg-bone px-6 text-[15px] font-bold text-ink transition hover:bg-white"
                   >
-                    GitHub ↗
+                    GitHub <ArrowUpRightIcon className="h-4 w-4" />
                   </a>
                 </Magnetic>
               </motion.div>

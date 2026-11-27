@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Project } from '../data/portfolio';
 import { EASE, Tilt } from './fx';
+import { ArrowUpRightIcon, PlayIcon } from './Icons';
 import { ProjectArt } from './Poster';
 import YPLogo from './YPLogo';
 
@@ -54,7 +55,9 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
               ))}
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <span className="flex min-h-11 items-center gap-2 rounded-md bg-bone px-5 text-sm font-bold tracking-[0.08em] text-ink transition group-hover:bg-white">▶ View Project</span>
+              <span className="flex min-h-11 items-center gap-2 rounded-md bg-bone px-5 text-sm font-bold tracking-[0.08em] text-ink transition group-hover:bg-white">
+                <PlayIcon className="h-3.5 w-3.5" /> View Project
+              </span>
               {project.github && (
                 <a
                   href={project.github}
@@ -62,9 +65,9 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
                   rel="noreferrer"
                   data-cursor="link"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex min-h-11 items-center gap-2 rounded-md border border-white/25 bg-black/30 px-4 text-sm font-semibold text-bone backdrop-blur transition hover:border-bone"
+                  className="flex min-h-11 items-center gap-1.5 rounded-md border border-white/25 bg-black/30 px-4 text-sm font-semibold text-bone backdrop-blur transition hover:border-bone"
                 >
-                  GitHub ↗
+                  GitHub <ArrowUpRightIcon className="h-3.5 w-3.5" />
                 </a>
               )}
             </div>

@@ -92,6 +92,7 @@ function SkillCard({ skill, hue }: { skill: Skill; hue: string }) {
       className="group relative flex min-h-[168px] flex-col justify-between overflow-hidden rounded-xl bg-ink-2 p-4 text-left ring-1 ring-white/10 transition-shadow duration-500 hover:ring-white/20"
       style={{ boxShadow: open ? `0 18px 50px -12px ${hue}55, 0 0 0 1px ${hue}66` : undefined }}
     >
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       <div>
         <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-2xl transition duration-500 group-hover:opacity-60" style={{ background: hue }} />
         <motion.span
@@ -113,19 +114,11 @@ function SkillCard({ skill, hue }: { skill: Skill; hue: string }) {
         </span>
       </div>
       <div className="relative mt-2 min-h-[2.2em]">
-        <AnimatePresence initial={false}>
-          {open && evidence && (
-            <motion.span
-              className="block text-[11px] leading-snug text-mist"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 4 }}
-              transition={{ duration: 0.25, ease: EASE }}
-            >
-              {evidence.join(' · ')}
-            </motion.span>
-          )}
-        </AnimatePresence>
+        {evidence && (
+          <span className={`block text-[11px] leading-snug transition-colors duration-300 ${open ? 'text-bone' : 'text-smoke'}`}>
+            {evidence.join(' · ')}
+          </span>
+        )}
       </div>
     </motion.button>
   );
