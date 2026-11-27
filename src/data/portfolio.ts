@@ -258,7 +258,10 @@ export const achievements: Achievement[] = [
 
 export type Certification = { issuer: string; name: string; link?: string };
 
-export const certifications: Certification[] = [{ issuer: 'Apna College', name: 'Web Development' }];
+export const certifications: Certification[] = [
+  { issuer: 'Red Hat', name: 'Red Hat System Administration I (RH124)' },
+  { issuer: 'Apna College', name: 'Web Development' },
+];
 
 export type Skill = { name: string; mono: string; note?: string };
 export type SkillCategory = { id: string; title: string; subtitle: string; skills: Skill[] };
