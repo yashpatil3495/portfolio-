@@ -7,7 +7,7 @@ import { EASE, Magnetic, SectionHeading } from './fx';
 export default function ResumeSection({ onView }: { onView: () => void }) {
   return (
     <>
-      <SectionHeading kicker="The screenplay" title="The Full Story" />
+      <SectionHeading kicker="Resume" title="The Full Story" />
       <div className="gutter grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
         <motion.div
           initial={{ opacity: 0, y: 60, rotateX: 10 }}
@@ -20,9 +20,9 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
         </motion.div>
 
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="font-serif text-3xl italic leading-tight text-bone">Every episode, on one page.</p>
+          <p className="font-serif text-3xl italic leading-tight text-bone">Everything on one page.</p>
           <p className="mt-3 text-sm leading-relaxed text-mist">
-            Education, experience, projects, achievements and skills — view it here or take a copy with you.
+            Education, projects, competitions, and skills in a single printable sheet.
           </p>
           <div className="mt-6 flex flex-col gap-3">
             <Magnetic className="w-full">

@@ -14,22 +14,29 @@ const alpha = await sharp('pic.png')
   .ensureAlpha()
   .extractChannel('alpha')
   .resize(width, height, { kernel: 'lanczos3' })
-  .blur(0.8)
+  // Erode the alpha channel slightly to kill white fringe pixels
+  .blur(0.4)
+  .linear(1.6, -30) // push semi-transparent edge pixels toward fully transparent
   .raw()
   .toBuffer();
 
 const rgb = await sharp('pic1.jpeg').removeAlpha().raw().toBuffer();
 const rgba = Buffer.alloc(width * height * 4);
+const BG_R = 7, BG_G = 7, BG_B = 10; // matches --color-ink: #07070a
 for (let i = 0; i < width * height; i++) {
-  rgba[i * 4] = rgb[i * 3];
-  rgba[i * 4 + 1] = rgb[i * 3 + 1];
-  rgba[i * 4 + 2] = rgb[i * 3 + 2];
-  rgba[i * 4 + 3] = alpha[i];
+  const a = Math.min(255, Math.max(0, alpha[i]));
+  // Pre-multiply against the dark background colour so semi-transparent
+  // edge pixels blend toward ink rather than white.
+  const t = a / 255;
+  rgba[i * 4]     = Math.round(rgb[i * 3]     * t + BG_R * (1 - t));
+  rgba[i * 4 + 1] = Math.round(rgb[i * 3 + 1] * t + BG_G * (1 - t));
+  rgba[i * 4 + 2] = Math.round(rgb[i * 3 + 2] * t + BG_B * (1 - t));
+  rgba[i * 4 + 3] = a;
 }
 const cutout = await sharp(rgba, { raw: { width, height, channels: 4 } }).png().toBuffer();
 
 for (const w of [1100, 720, 420]) {
-  await sharp(cutout).resize({ width: w }).webp({ quality: 86, alphaQuality: 90 }).toFile(`${OUT}/portrait-${w}.webp`);
+  await sharp(cutout).resize({ width: w }).webp({ quality: 82, alphaQuality: 100, effort: 6 }).toFile(`${OUT}/portrait-${w}.webp`);
 }
 
 // Social share image (1200x630) on a dark backdrop
@@ -51,6 +58,6 @@ await sharp({ create: { width: 1200, height: 630, channels: 4, background: '#070
       </svg>`),
     },
   ])
-  .jpeg({ quality: 85 })
+  .jpeg({ quality: 82, mozjpeg: true })
   .toFile(`${OUT}/og-image.jpg`);
 console.log('images built');

@@ -105,6 +105,9 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
           srcSet={profile.portrait.srcSet}
           sizes="100vw"
           alt=""
+          width={720}
+          height={693}
+          decoding="async"
           className="h-[88vh] w-auto max-w-none object-contain [mask-image:linear-gradient(to_bottom,black_60%,transparent)]"
         />
       </motion.div>

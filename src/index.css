@@ -146,6 +146,14 @@ a:focus-visible {
   animation: shimmer 6s linear infinite;
 }
 
+@media (hover: none), (max-width: 767px) {
+  .grain {
+    animation: none;
+    will-change: auto;
+    opacity: 0.035;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grain,
   .light-streak,

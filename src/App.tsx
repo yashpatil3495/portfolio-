@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useState, type ReactNode } from 'react';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, MotionConfig, motion } from 'framer-motion';
 import { viewerProfiles, type ProfileId, type Project, type SectionId } from './data/portfolio';
 import { SmoothScrollProvider, useSmoothScroll } from './hooks/smoothScroll';
 import CustomCursor from './components/CustomCursor';
@@ -9,17 +9,17 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ContinueWatching from './components/ContinueWatching';
 import Scene from './components/Scene';
-import About from './components/About';
-import Seasons from './components/Seasons';
-import Originals from './components/Originals';
-import TopPicks from './components/TopPicks';
-import Skills from './components/Skills';
-import Achievements from './components/Achievements';
-import ResumeSection from './components/ResumeViewer';
-import FinalCTA from './components/FinalCTA';
 import { EASE } from './components/fx';
 
-// Overlays are only needed on demand — split them out of the first load.
+// Below-the-fold sections & overlays — split out so the first view loads fast on slow connections.
+const About = lazy(() => import('./components/About'));
+const Seasons = lazy(() => import('./components/Seasons'));
+const Originals = lazy(() => import('./components/Originals'));
+const TopPicks = lazy(() => import('./components/TopPicks'));
+const Skills = lazy(() => import('./components/Skills'));
+const Achievements = lazy(() => import('./components/Achievements'));
+const ResumeSection = lazy(() => import('./components/ResumeViewer'));
+const FinalCTA = lazy(() => import('./components/FinalCTA'));
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
 const ProjectModal = lazy(() => import('./components/ProjectModal'));
 const ResumeModal = lazy(() => import('./components/ResumeModal'));
@@ -104,7 +104,8 @@ function Series() {
   };
 
   return (
-    <LayoutGroup>
+    <MotionConfig reducedMotion="user">
+      <LayoutGroup>
       <div className="grain" aria-hidden />
       <CustomCursor />
 
@@ -114,17 +115,19 @@ function Series() {
       </AnimatePresence>
 
       {stage === 'home' && (
-        <motion.div initial={{ opacity: 0, scale: 1.03, filter: 'blur(10px)' }} animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }} transition={{ duration: 1, ease: EASE }}>
+        <motion.div initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.75, ease: EASE }}>
           <Navbar order={order} profileId={profileId} onSwitch={pickProfile} />
           <main>
             <Hero key={`hero-${profileId}`} onPlay={() => setPlaying(true)} onResume={() => setResumeOpen(true)} profileId={profileId} />
             <ContinueWatching order={order} />
-            {order.map((id) => (
-              <Scene key={id} id={id} className={id === 'originals' ? '!py-0 sm:!py-0' : ''}>
-                {sections[id]}
-              </Scene>
-            ))}
-            <FinalCTA onReplay={() => setStage('opening')} />
+            <Suspense fallback={null}>
+              {order.map((id) => (
+                <Scene key={id} id={id} className={id === 'originals' ? '!py-0 sm:!py-0' : ''}>
+                  {sections[id]}
+                </Scene>
+              ))}
+              <FinalCTA onReplay={() => setStage('opening')} />
+            </Suspense>
           </main>
         </motion.div>
       )}
@@ -151,5 +154,6 @@ function Series() {
         )}
       </AnimatePresence>
     </LayoutGroup>
+    </MotionConfig>
   );
 }

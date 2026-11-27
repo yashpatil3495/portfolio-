@@ -83,7 +83,7 @@ export function RevealText({ text, className = '', delay = 0, as = 'span' }: { t
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-4% 0px' }}
-      transition={{ staggerChildren: 0.06, delayChildren: delay }}
+      transition={{ staggerChildren: 0.045, delayChildren: delay }}
       aria-label={text}
     >
       {words.map((w, i) => (
@@ -92,7 +92,7 @@ export function RevealText({ text, className = '', delay = 0, as = 'span' }: { t
             className="inline-block"
             variants={{
               hidden: { y: '105%', opacity: 0 },
-              show: { y: '0%', opacity: 1, transition: { duration: 0.85, ease: EASE } },
+              show: { y: '0%', opacity: 1, transition: { duration: 0.68, ease: EASE } },
             }}
           >
             {w}
@@ -129,10 +129,12 @@ export function SectionHeading({ kicker, title, aside }: { kicker: string; title
   );
 }
 
-/** Lightweight drifting dust particles on a canvas — pauses when off screen. */
+/** Lightweight drifting dust particles on a canvas — pauses when off screen or hidden. */
 export function Particles({ count = 46, color = '255,90,110', className = '' }: { count?: number; color?: string; className?: string }) {
   const ref = useRef<HTMLCanvasElement>(null);
+  const fine = useFinePointer();
   const reduced = useReducedMotionPref();
+  const effectiveCount = fine ? count : Math.max(12, Math.round(count * 0.45));
 
   useEffect(() => {
     const canvas = ref.current;
@@ -153,7 +155,7 @@ export function Particles({ count = 46, color = '255,90,110', className = '' }: 
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const dots = Array.from({ length: count }, () => ({
+    const dots = Array.from({ length: effectiveCount }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: Math.random() * 1.6 + 0.3,
@@ -165,7 +167,19 @@ export function Particles({ count = 46, color = '255,90,110', className = '' }: 
 
     let raf = 0;
     let running = false;
+    let visible = false;
     let last = performance.now();
+    const start = () => {
+      if (running || !visible || document.hidden) return;
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(raf);
+    };
     const tick = (now: number) => {
       const dt = Math.min(50, now - last);
       last = now;
@@ -189,22 +203,20 @@ export function Particles({ count = 46, color = '255,90,110', className = '' }: 
       raf = requestAnimationFrame(tick);
     };
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !running) {
-        running = true;
-        last = performance.now();
-        raf = requestAnimationFrame(tick);
-      } else if (!entry.isIntersecting && running) {
-        running = false;
-        cancelAnimationFrame(raf);
-      }
+      visible = entry.isIntersecting;
+      if (visible) start();
+      else stop();
     });
+    const onVis = () => (document.hidden ? stop() : start());
     io.observe(canvas);
+    document.addEventListener('visibilitychange', onVis);
     return () => {
       io.disconnect();
       ro.disconnect();
-      cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVis);
+      stop();
     };
-  }, [count, color, reduced]);
+  }, [effectiveCount, color, reduced]);
 
   return <canvas ref={ref} aria-hidden className={`pointer-events-none absolute inset-0 h-full w-full ${className}`} />;
 }
