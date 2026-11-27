@@ -260,6 +260,7 @@ export type Certification = { issuer: string; name: string; link?: string };
 
 export const certifications: Certification[] = [
   { issuer: 'Red Hat', name: 'Red Hat System Administration I (RH124)' },
+  { issuer: 'Hacktoberfest', name: 'Open Source Contributor' },
   { issuer: 'Apna College', name: 'Web Development' },
 ];
 
